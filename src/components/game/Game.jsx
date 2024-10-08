@@ -38,70 +38,113 @@ const Game = ({cpu}) => {
   return (
     <div className='container game-container'>
       <div className='menu__container'>
-        <button className='game__button menu__button' onClick={() => setPause(true)}>MENU</button>
-        <img className='main__logo' src={LOGO} alt="" />
-        <button className='game__button restart__button' onClick={() => playAgain(true)}>RESTART</button>
+        <button
+          className='game__button menu__button'
+          onClick={() => setPause(true)}
+        >
+          MENU
+        </button>
+        <img className='main__logo' src={LOGO} alt='' />
+        <button
+          className='game__button restart__button'
+          onClick={() => playAgain(true)}
+        >
+          YENİDEN BAŞLAT
+        </button>
       </div>
 
       <div className='game__container'>
         <article className='player__card player-1-card'>
-          <img src={PLAYER1} alt="" />
-          <h2>PLAYER 1</h2>
+          <img src={PLAYER1} alt='' />
+          <h2>OYUNCU 1</h2>
           <p>{player1Wins}</p>
         </article>
 
         <div className='game__board'>
+          <div
+            className='white-board'
+            style={{ backgroundImage: `url(${WITHEBOARD})` }}
+          ></div>
+          <div
+            className='black-board'
+            style={{ backgroundImage: `url(${BLACKBOARD})` }}
+          ></div>
 
-          <div className='white-board' style={{ backgroundImage: `url(${WITHEBOARD})`}}></div>
-          <div className='black-board' style={{ backgroundImage: `url(${BLACKBOARD})`}}></div>
-
-          <Grid grid={grid} 
-                setNewDisk={setNewDisk} 
-                winner={winner}
-                wait={wait}
-                player={player}
-                winnerPos={winnerPos}
-                width={width}
-                cpu={cpu}/>
-
+          <Grid
+            grid={grid}
+            setNewDisk={setNewDisk}
+            winner={winner}
+            wait={wait}
+            player={player}
+            winnerPos={winnerPos}
+            width={width}
+            cpu={cpu}
+          />
         </div>
-    
+
         <article className='player__card player-2-card'>
-          <img src={(cpu) ? PLAYERCPU: PLAYER2} alt="" />
-          <h2>{(cpu)? 'CPU': 'PLAYER 2'}</h2>
+          <img src={cpu ? PLAYERCPU : PLAYER2} alt='' />
+          <h2>{cpu ? "CPU" : "PLAYER 2"}</h2>
           <p>{player2Wins}</p>
         </article>
 
-        {!winner && <Timer  timerCounter={timerCounter} 
-                            player={player} 
-                            setTimerCounter={setTimerCounter}
-                            setWhoWins={setWhoWins}
-                            pause={pause}
-                            cpu={cpu}/>}
+        {!winner && (
+          <Timer
+            timerCounter={timerCounter}
+            player={player}
+            setTimerCounter={setTimerCounter}
+            setWhoWins={setWhoWins}
+            pause={pause}
+            cpu={cpu}
+          />
+        )}
 
-        { winner && !wait && <Winner  winner={winner} 
-                                      playAgain={playAgain}
-                                      cpu={cpu}/>}
-        
+        {winner && !wait && (
+          <Winner winner={winner} playAgain={playAgain} cpu={cpu} />
+        )}
       </div>
 
-      
-
-      <div className={ (winner===1) ? 'winner-color winner-red' : ((winner===2)) ? 'winner-color winner-yellow' : 'winner-color'}></div>
+      <div
+        className={
+          winner === 1
+            ? "winner-color winner-red"
+            : winner === 2
+            ? "winner-color winner-yellow"
+            : "winner-color"
+        }
+      ></div>
 
       {pause && (
         <Modal setPause={setPause}>
           <div className='modal__content'>
-            <p>PAUSE</p>
-            <button className='modal__button white-button' onClick={() => setPause(false)}>CONTINUE GAME</button>
-            <button className='modal__button white-button' onClick={() => {setPause(false); playAgain(true);}}>RESTART</button>
-            <Link to='/' className='modal__button red-button' onClick={() => playAgain(true)}>QUIT GAME</Link>
+            <p>DURAKLAT</p>
+            <button
+              className='modal__button white-button'
+              onClick={() => setPause(false)}
+            >
+              OYUNA DEVAM ET
+            </button>
+            <button
+              className='modal__button white-button'
+              onClick={() => {
+                setPause(false);
+                playAgain(true);
+              }}
+            >
+              YENİDEN BAŞLAT
+            </button>
+            <Link
+              to='/'
+              className='modal__button red-button'
+              onClick={() => playAgain(true)}
+            >
+              OYUNDAN ÇIK
+            </Link>
           </div>
-        </Modal> )
-      }
-
+        </Modal>
+      )}
     </div>
-  )
+  );
 }
 
 export {Game}
