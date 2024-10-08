@@ -84,7 +84,7 @@ const Game = ({cpu}) => {
 
         <article className='player__card player-2-card'>
           <img src={cpu ? PLAYERCPU : PLAYER2} alt='' />
-          <h2>{cpu ? "CPU" : "PLAYER 2"}</h2>
+          <h2>{cpu ? "AI" : "OYUNCU 2"}</h2>
           <p>{player2Wins}</p>
         </article>
 
